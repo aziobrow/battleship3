@@ -66,7 +66,7 @@ class Coordinates
     three_coordinates = [first_coordinate, middle_coordinate, third_coordinate]
   end
 
-  def generate_appropriate_coordinates
+  def generate_coordinates
     #make sure this is followed by a validity checker with all three coordinates
     if three_coordinates? && same_row?
       add_third_coordinate_for_same_row
@@ -76,6 +76,19 @@ class Coordinates
       @coordinates
     end
   end
+
+  def invalid_placement?
+    return true if @coordinates.length != 2
+    return true if same_column? && same_row?
+    return true if !(same_column? or same_row?)
+    return true if already_occupied?
+    return true if count_coordinate_range > 2
+    return true if !exist_on_gameboard?
+    return true if count_coordinate_range == 2 and @three_unit_ship == true
+    return true if count_coordinate_range == 1 and @two_unit_ship == true
+    false
+  end
+
 
 
 end

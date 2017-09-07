@@ -126,7 +126,32 @@ class CoordinatesTest < Minitest::Test
     assert_equal ['C3', 'C4'], coordinates.generate_coordinates
   end
 
+  def test_it_recognizes_invalid_ship_placement
 
+    coordinates = Coordinates.new(['D1', 'D3'])
+
+    refute coordinates.invalid_placement?
+
+    coordinates = Coordinates.new(['D1'])
+
+    assert coordinates.invalid_placement?
+
+    coordinates = Coordinates.new(['A1', 'A1'])
+
+    assert coordinates.invalid_placement?
+
+    coordinates = Coordinates.new(['D1', 'B2'])
+
+    assert coordinates.invalid_placement?
+
+    coordinates = Coordinates.new(['C1', 'C4'])
+
+    assert coordinates.invalid_placement?
+
+    coordinates = Coordinates.new(['B3', 'Z2'])
+
+    assert coordinates.invalid_placement?
+  end
 
 
 end

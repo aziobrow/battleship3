@@ -41,4 +41,5 @@ class GameBoard
     column = @board.map { |row| row[index] }
   end
 
+
 end
